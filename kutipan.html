@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kutipan Guru</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      transition: background-color 0.5s ease;
+      padding: 20px;
+    }
+    .foto {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 4px solid white;
+    }
+    .kutipan {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffdd57;
+      color: #0047ab;
+      font-weight: bold;
+    }
+    .sambutan {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sambutan" id="sambutanSiswa"></div>
+
+  <img id="fotoGuru" class="foto" src="" alt="Foto Guru" />
+  <div id="kutipanGuru" class="kutipan"></div>
+  <button id="nextBtn">Next</button>
+
+  <script>
+    // Ambil nama siswa dari localStorage
+    const nama = localStorage.getItem("nama") || "Siswa";
+    document.getElementById("sambutanSiswa").textContent = `Halo, ${nama}! Berikut adalah pesan dari guru-gurumu:`;
+
+    // Data guru dan kutipan
+    const dataGuru = [
+      {
+        foto: 'foto1.jpg',
+        kutipan: 'Selamat atas kelulusanmu! Semoga sukses di jenjang berikutnya.',
+        warna: '#0047ab'
+      },
+      {
+        foto: 'foto2.jpg',
+        kutipan: 'Jangan lupa selalu berbakti kepada guru dan teruslah belajar.',
+        warna: '#1e90ff'
+      },
+      {
+        foto: 'foto3.jpg',
+        kutipan: 'Kelulusan adalah awal dari perjalanan yang lebih besar, semangat terus!',
+        warna: '#003366'
+      }
+    ];
+
+    let index = 0;
+
+    const fotoGuru = document.getElementById('fotoGuru');
+    const kutipanGuru = document.getElementById('kutipanGuru');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function tampilkanGuru(i) {
+      const guru = dataGuru[i];
+      fotoGuru.src = guru.foto;
+      kutipanGuru.textContent = guru.kutipan;
+      document.body.style.backgroundColor = guru.warna;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index++;
+      if (index >= dataGuru.length) {
+        window.location.href = 'pesan-akhir.html';
+        return;
+      }
+      tampilkanGuru(index);
+    });
+
+    // Tampilkan guru pertama
+    tampilkanGuru(index);
+  </script>
+
+</body>
+</html>

@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ucapan Kelulusan Akhir</title>
+  <title>Kutipan Guru</title>
   <style>
     body {
       margin: 0; padding: 0;
       height: 100vh;
-      background-image: url('images/background-sekolah1.webp');
-      background-size: cover;
-      background-position: center;
+      color: white;
       font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       text-align: center;
-      color: white;
-      padding: 20px;
+      padding: 0 20px;
       position: relative;
     }
     #overlay {
@@ -26,29 +27,103 @@
       background: rgba(0, 128, 0, 0.25); /* Lapisan hijau tipis */
       z-index: 0;
     }
-    #pesanAkhir {
-      background: rgba(0, 0, 0, 0.65);
-      padding: 30px 40px;
+    #namaSiswa {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      z-index: 2;
+    }
+    #kutipanBox {
+      background: rgba(0,0,0,0.5);
+      padding: 25px 30px;
       border-radius: 15px;
       max-width: 600px;
-      font-size: 1.5rem;
-      font-weight: bold;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
       z-index: 1;
+    }
+    #kutipanText {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    #namaGuru {
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #0047ab;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003580;
     }
   </style>
 </head>
 <body>
 
   <div id="overlay"></div>
-  <div id="pesanAkhir">
-    <p id="ucapan"></p>
+  <div id="namaSiswa">Halo, Siswa</div>
+  <div id="kutipanBox">
+    <div id="kutipanText">Memuat kutipan...</div>
+    <div id="namaGuru"></div>
+    <button id="nextBtn">Next</button>
   </div>
 
   <script>
-    const nama = localStorage.getItem('nama') || 'Siswa';
-    const ucapan = `Selamat ${nama}, kamu lulus! Selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!`;
-    document.getElementById('ucapan').textContent = ucapan;
+    const kutipanGuru = [
+      {
+        nama: "Pak Arifin, S.Pd.I",
+        foto: "images/bg_Arifin.webp",
+        kutipan: "Selamat atas kelulusan kalian, anak-anak hebat MTs Muhammadiyah Malino! Jangan berhenti bermimipi dan belajar. Kami bangga padamu!."
+      },
+      {
+        nama: "Bu Syamsidarna",
+        foto: "images/bg_sari.jpg",
+        kutipan: "Jangan lupa untuk selalu berdoa dan hormati guru-gurumu."
+      },
+      {
+        nama: "Pak Ipul",
+        foto: "images/bg_andi.jpg",
+        kutipan: "Semoga sukses di jenjang berikutnya dan jadilah pribadi yang baik."
+      }
+    ];
+
+    let index = 0;
+    const kutipanText = document.getElementById('kutipanText');
+    const namaGuru = document.getElementById('namaGuru');
+    const nextBtn = document.getElementById('nextBtn');
+    const namaSiswa = document.getElementById('namaSiswa');
+
+    function tampilkanKutipan(i) {
+      const guru = kutipanGuru[i];
+      document.body.style.backgroundImage = `url('${guru.foto}')`;
+      kutipanText.textContent = guru.kutipan;
+      namaGuru.textContent = `- ${guru.nama}`;
+      nextBtn.textContent = i === kutipanGuru.length - 1 ? 'Lanjut ke Ucapan Akhir' : 'Next';
+    }
+
+    namaSiswa.textContent = `Halo, ${localStorage.getItem('nama') || 'Siswa'}`;
+    tampilkanKutipan(index);
+
+    nextBtn.addEventListener('click', () => {
+      if (index < kutipanGuru.length - 1) {
+        index++;
+        tampilkanKutipan(index);
+      } else {
+        window.location.href = 'pesan-akhir.html';
+      }
+    });
   </script>
 
 </body>

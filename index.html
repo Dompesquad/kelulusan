@@ -1,49 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pengumuman Kelulusan</title>
-<style>
-  body {
-    background-color: #0047ab;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
-  }
-  button {
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: #ffdd57;
-    color: #0047ab;
-    font-weight: bold;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pengumuman Kelulusan</title>
+  <style>
+    body {
+      background-color: #0047ab;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      margin: 10px;
+      border-radius: 6px;
+      border: none;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffdd57;
+      color: #0047ab;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Selamat Datang di Pengumuman Kelulusan Kelas 9 MTs</h1>
+  <h1>Selamat Datang di Pengumuman Kelulusan Kelas 9 MTs</h1>
 
-<audio id="bgMusic" src="instrumen.mp3" loop></audio>
+  <p>Silakan masukkan Nama dan NISN kamu untuk melihat pengumuman kelulusan.</p>
 
-<button id="lihatKelulusanBtn">Lihat Kelulusan</button>
+  <input type="text" id="nama" placeholder="Masukkan Nama" required /><br>
+  <input type="text" id="nisn" placeholder="Masukkan NISN" required /><br>
 
-<script>
-  const btn = document.getElementById('lihatKelulusanBtn');
-  const music = document.getElementById('bgMusic');
+  <audio id="bgMusic" src="instrumen.mp3" loop></audio>
 
-  btn.addEventListener('click', () => {
-    music.play().catch(() => {
-      alert('Klik tombol untuk memulai musik dan melihat kelulusan');
+  <button id="lihatKelulusanBtn">Lihat Kelulusan</button>
+
+  <script>
+    const btn = document.getElementById('lihatKelulusanBtn');
+    const music = document.getElementById('bgMusic');
+
+    btn.addEventListener('click', () => {
+      const nama = document.getElementById('nama').value.trim();
+      const nisn = document.getElementById('nisn').value.trim();
+
+      if (nama === "" || nisn === "") {
+        alert("Silakan isi nama dan NISN terlebih dahulu.");
+        return;
+      }
+
+      // Simpan ke localStorage
+      localStorage.setItem("nama", nama);
+      localStorage.setItem("nisn", nisn);
+
+      // Mainkan musik
+      music.play().catch(() => {
+        alert("Klik untuk memulai musik.");
+      });
+
+      // Pindah ke halaman kutipan
+      window.location.href = 'kutipan.html';
     });
-    // pindah ke halaman kutipan
-    window.location.href = 'kutipan.html';
-  });
-</script>
+  </script>
 
 </body>
 </html>

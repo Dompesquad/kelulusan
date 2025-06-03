@@ -56,11 +56,9 @@
   <button id="nextBtn">Next</button>
 
   <script>
-    // Ambil nama siswa dari localStorage
     const nama = localStorage.getItem("nama") || "Siswa";
     document.getElementById("sambutanSiswa").textContent = `Halo, ${nama}! Berikut adalah pesan dari guru-gurumu:`;
 
-    // Data guru dan kutipan
     const dataGuru = [
       {
         foto: 'foto1.jpg',
@@ -101,7 +99,6 @@
       tampilkanGuru(index);
     });
 
-    // Tampilkan guru pertama
     tampilkanGuru(index);
   </script>
 

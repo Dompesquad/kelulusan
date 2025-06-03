@@ -26,7 +26,7 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 128, 0, 0.3); /* Hijau transparan */
+      background-color: rgba(0, 128, 0, 0.3);
       z-index: 0;
     }
 
@@ -41,13 +41,40 @@
       font-weight: bold;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
+
+    .nama {
+      color: black;
+      font-weight: bold;
+      background: white;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+
+    .lulus {
+      color: #00ff00; /* hijau neon */
+    }
+
+    .tidak-lulus {
+      color: #ff4444; /* merah */
+    }
   </style>
 </head>
 <body>
 
   <div id="pesanAkhir">
-    <p>Selamat kamu lulus, selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!</p>
+    <p id="pesan"></p>
   </div>
+
+  <script>
+    const nama = localStorage.getItem('nama') || 'Ananda';
+    const statusLulus = true; // ganti jadi false jika tidak lulus
+
+    const pesan = statusLulus
+      ? `Selamat <span class="nama">${nama}</span>, kamu <span class="lulus">lulus</span>! Selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!`
+      : `Maaf <span class="nama">${nama}</span>, kamu <span class="tidak-lulus">tidak lulus</span>. Tetap semangat dan terus berusaha. Guru-guru di MTs Muhammadiyah Malino tetap bangga padamu.`;
+
+    document.getElementById('pesan').innerHTML = pesan;
+  </script>
 
 </body>
 </html>

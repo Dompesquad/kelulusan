@@ -3,70 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Selamat Kelulusan!</title>
+  <title>Ucapan Kelulusan Akhir</title>
   <style>
     body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: 'Arial', sans-serif;
-      background-color: #0047ab;
-      color: white;
-      text-align: center;
+      margin: 0; padding: 0;
+      height: 100vh;
+      background-image: url('images/bg_guru_semua.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      text-align: center;
+      color: white;
+      padding: 20px;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-    }
-
-    p {
-      font-size: 1.2rem;
+    #pesanAkhir {
+      background: rgba(0, 0, 0, 0.65);
+      padding: 30px 40px;
+      border-radius: 15px;
       max-width: 600px;
-      line-height: 1.6;
-    }
-
-    button {
-      margin-top: 40px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background-color: #ffdd57;
-      color: #0047ab;
+      font-size: 1.5rem;
       font-weight: bold;
-      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
   </style>
 </head>
 <body>
 
-  <h1>🎓 Selamat, <span id="namaSiswa">Siswa</span>! 🎉</h1>
-  <h2>NISN: <span id="nisnSiswa">-</span></h2>
-
-  <p>
-    Kamu dinyatakan <strong>LULUS</strong>. Selamat melanjutkan ke jenjang pendidikan berikutnya.  
-    Jangan lupakan guru-gurumu yang ada di <strong>MTs Muhammadiyah Malino</strong>, ya!  
-    Teruslah belajar dan jadilah pribadi yang membanggakan.
-  </p>
-
-  <button onclick="window.location.href='index.html'">Kembali ke Halaman Awal</button>
-
-  <script>
-    const nama = localStorage.getItem("nama") || "Siswa";
-    const nisn = localStorage.getItem("nisn") || "-";
-    document.getElementById("namaSiswa").textContent = nama;
-    document.getElementById("nisnSiswa").textContent = nisn;
-  </script>
+  <div id="pesanAkhir">
+    <p>Selamat kamu lulus, selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!</p>
+  </div>
 
 </body>
 </html>

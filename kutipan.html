@@ -19,23 +19,39 @@
       background-repeat: no-repeat;
       text-align: center;
       padding: 0 20px;
+      position: relative;
     }
+
+    /* Lapisan hijau tipis */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 128, 0, 0.3); /* hijau madrasah */
+      z-index: 0;
+    }
+
     #kutipanBox {
+      position: relative;
+      z-index: 1;
       background: rgba(0,0,0,0.5);
       padding: 25px 30px;
       border-radius: 15px;
       max-width: 600px;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
+
     #kutipanText {
       font-size: 1.5rem;
       margin-bottom: 15px;
     }
+
     #namaGuru {
       font-size: 1.2rem;
       font-style: italic;
       font-weight: bold;
     }
+
     button {
       margin-top: 30px;
       padding: 12px 30px;
@@ -48,6 +64,7 @@
       font-weight: bold;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #003580;
     }
@@ -78,7 +95,7 @@
         foto: "images/bg_andi.jpg",
         kutipan: "Semoga sukses di jenjang berikutnya dan jadilah pribadi yang baik."
       }
-      // Tambah sesuai kebutuhan
+      // Tambahkan kutipan lainnya di sini
     ];
 
     let index = 0;
@@ -91,11 +108,7 @@
       document.body.style.backgroundImage = `url('${guru.foto}')`;
       kutipanText.textContent = guru.kutipan;
       namaGuru.textContent = `- ${guru.nama}`;
-      if (i === kutipanGuru.length -1) {
-        nextBtn.textContent = 'Lanjut ke Ucapan Akhir';
-      } else {
-        nextBtn.textContent = 'Next';
-      }
+      nextBtn.textContent = i === kutipanGuru.length - 1 ? 'Lanjut ke Ucapan Akhir' : 'Next';
     }
 
     nextBtn.addEventListener('click', () => {
@@ -107,7 +120,6 @@
       }
     });
 
-    // Load pertama
     tampilkanKutipan(index);
   </script>
 

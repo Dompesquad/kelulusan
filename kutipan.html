@@ -28,8 +28,13 @@
     }
     .kutipan {
       font-size: 1.5rem;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       max-width: 600px;
+    }
+    .nama-guru {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 40px;
     }
     button {
       padding: 12px 24px;
@@ -53,6 +58,7 @@
 
   <img id="fotoGuru" class="foto" src="" alt="Foto Guru" />
   <div id="kutipanGuru" class="kutipan"></div>
+  <div id="namaGuru" class="nama-guru"></div>
   <button id="nextBtn">Next</button>
 
   <script>
@@ -63,16 +69,19 @@
       {
         foto: 'foto1.jpg',
         kutipan: 'Selamat atas kelulusanmu! Semoga sukses di jenjang berikutnya.',
+        nama: 'Bu Syamsidarna',
         warna: '#0047ab'
       },
       {
         foto: 'foto2.jpg',
         kutipan: 'Jangan lupa selalu berbakti kepada guru dan teruslah belajar.',
+        nama: 'Bunda Ramlah',
         warna: '#1e90ff'
       },
       {
         foto: 'foto3.jpg',
         kutipan: 'Kelulusan adalah awal dari perjalanan yang lebih besar, semangat terus!',
+        nama: 'Bu Fitri',
         warna: '#003366'
       }
     ];
@@ -81,12 +90,14 @@
 
     const fotoGuru = document.getElementById('fotoGuru');
     const kutipanGuru = document.getElementById('kutipanGuru');
+    const namaGuru = document.getElementById('namaGuru');
     const nextBtn = document.getElementById('nextBtn');
 
     function tampilkanGuru(i) {
       const guru = dataGuru[i];
       fotoGuru.src = guru.foto;
-      kutipanGuru.textContent = guru.kutipan;
+      kutipanGuru.textContent = `"${guru.kutipan}"`;
+      namaGuru.textContent = `- ${guru.nama}`;
       document.body.style.backgroundColor = guru.warna;
     }
 

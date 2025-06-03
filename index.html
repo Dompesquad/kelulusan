@@ -37,19 +37,15 @@
 
   <h1>Selamat Datang diPengumuman Kelulusan Kelas 9 MTs Muhammadiyah Malino</h1>
 
-  <p>Silakan masukkan Nama dan NISN kamu untuk melihat pengumuman kelulusan.</p>
+  <p>Masukkan Nama dan NISN kamu untuk melihat pengumuman kelulusan.</p>
 
   <input type="text" id="nama" placeholder="Masukkan Nama" required /><br>
   <input type="text" id="nisn" placeholder="Masukkan NISN" required /><br>
 
-
   <button id="lihatKelulusanBtn">Lihat Kelulusan</button>
 
   <script>
-    const btn = document.getElementById('lihatKelulusanBtn');
-    const music = document.getElementById('bgMusic');
-
-    btn.addEventListener('click', () => {
+    document.getElementById('lihatKelulusanBtn').addEventListener('click', () => {
       const nama = document.getElementById('nama').value.trim();
       const nisn = document.getElementById('nisn').value.trim();
 
@@ -58,16 +54,9 @@
         return;
       }
 
-      // Simpan ke localStorage
       localStorage.setItem("nama", nama);
       localStorage.setItem("nisn", nisn);
 
-      // Mainkan musik
-      music.play().catch(() => {
-        alert("Klik untuk memulai musik.");
-      });
-
-      // Pindah ke halaman kutipan
       window.location.href = 'kutipan.html';
     });
   </script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pengumuman Kelulusan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="centered">
+  <div class="form-box">
+    <h1>Pengumuman Kelulusan Kelas 9</h1>
+    <input type="text" id="nama" placeholder="Nama Lengkap">
+    <input type="text" id="nisn" placeholder="NISN">
+    <button onclick="kirimData()">Lihat Pesan Kelulusan</button>
+  </div>
+
+  <script>
+    function kirimData() {
+      const nama = document.getElementById('nama').value;
+      const nisn = document.getElementById('nisn').value;
+      if (nama && nisn) {
+        localStorage.setItem('nama', nama);
+        localStorage.setItem('nisn', nisn);
+        window.location.href = 'kelulusan.html';
+      } else {
+        alert('Harap isi nama dan NISN terlebih dahulu.');
+      }
+    }
+  </script>
+</body>
+</html>

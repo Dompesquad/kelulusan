@@ -62,11 +62,8 @@
   <button onclick="window.location.href='index.html'">Kembali ke Halaman Awal</button>
 
   <script>
-    // Ambil data dari localStorage
     const nama = localStorage.getItem("nama") || "Siswa";
     const nisn = localStorage.getItem("nisn") || "-";
-
-    // Tampilkan ke halaman
     document.getElementById("namaSiswa").textContent = nama;
     document.getElementById("nisnSiswa").textContent = nisn;
   </script>

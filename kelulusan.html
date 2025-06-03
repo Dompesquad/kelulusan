@@ -1,18 +1,100 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Kutipan dari Guru</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kutipan Guru</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    padding: 20px;
+  }
+  .foto {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid white;
+  }
+  .kutipan {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+  }
+  button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffdd57;
+    color: #0047ab;
+    font-weight: bold;
+  }
+</style>
 </head>
-<body class="kutipan-body">
-  <div class="kutipan-container">
-    <img id="foto-guru" src="" alt="Foto Guru">
-    <h2 id="nama-siswa"></h2>
-    <p id="isi-kutipan"></p>
-    <button onclick="lanjut()">Next</button>
-  </div>
+<body>
 
-  <script src="kutipan.js"></script>
+<img id="fotoGuru" class="foto" src="" alt="Foto Guru" />
+<div id="kutipanGuru" class="kutipan"></div>
+<button id="nextBtn">Next</button>
+
+<script>
+  // Data kutipan dan warna latar
+  const dataGuru = [
+    {
+      foto: 'foto1.jpg',
+      kutipan: 'Selamat atas kelulusanmu! Semoga sukses di jenjang berikutnya.',
+      warna: '#0047ab'
+    },
+    {
+      foto: 'foto2.jpg',
+      kutipan: 'Jangan lupa selalu berbakti kepada guru dan teruslah belajar.',
+      warna: '#1e90ff'
+    },
+    {
+      foto: 'foto3.jpg',
+      kutipan: 'Kelulusan adalah awal dari perjalanan yang lebih besar, semangat terus!',
+      warna: '#003366'
+    }
+  ];
+
+  let index = 0;
+
+  const fotoGuru = document.getElementById('fotoGuru');
+  const kutipanGuru = document.getElementById('kutipanGuru');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function tampilkanGuru(i) {
+    const guru = dataGuru[i];
+    fotoGuru.src = guru.foto;
+    kutipanGuru.textContent = guru.kutipan;
+    document.body.style.backgroundColor = guru.warna;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index++;
+    if(index >= dataGuru.length) {
+      // selesai, pindah ke pesan akhir
+      window.location.href = 'pesan-akhir.html';
+      return;
+    }
+    tampilkanGuru(index);
+  });
+
+  // Tampilkan awal
+  tampilkanGuru(index);
+</script>
+
 </body>
 </html>

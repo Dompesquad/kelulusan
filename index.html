@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Input Nama & NISN</title>
+  <title>Cek Kelulusan</title>
   <style>
     body {
       margin: 0; padding: 0;
@@ -19,31 +18,25 @@
       position: relative;
     }
 
-    /* Overlay hijau transparan */
     body::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 128, 0, 0.3); /* hijau tipis */
+      background-color: rgba(0, 128, 0, 0.3);
       z-index: 0;
     }
 
     form {
       position: relative;
       z-index: 1;
-      background: rgba(255, 255, 255, 0.3); /* transparan */
+      background: rgba(255, 255, 255, 0.3);
       padding: 30px 40px;
       border-radius: 15px;
+      backdrop-filter: blur(6px);
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
       text-align: center;
       width: 320px;
       color: white;
-      backdrop-filter: blur(6px); /* efek blur kaca */
-    }
-
-    form h2 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
     }
 
     input {
@@ -77,27 +70,52 @@
     button:hover {
       background-color: #003580;
     }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
   <form id="formInput">
-    <h2>Masukkan Nama & NISN</h2>
+    <h2>Cek Kelulusan</h2>
     <input type="text" id="nama" placeholder="Nama lengkap" required />
     <input type="text" id="nisn" placeholder="NISN" required />
-    <button type="submit">Lihat Kelulusan</button>
+    <button type="submit">Lihat Hasil</button>
+    <div class="error" id="errorMsg"></div>
   </form>
 
   <script>
     const form = document.getElementById('formInput');
-    form.addEventListener('submit', e => {
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const nama = document.getElementById('nama').value.trim();
-      const nisn = document.getElementById('nisn').value.trim();
-      if (nama && nisn) {
-        localStorage.setItem('nama', nama);
-        localStorage.setItem('nisn', nisn);
-        window.location.href = 'kutipan.html';
+
+      const namaInput = document.getElementById('nama').value.trim().toLowerCase();
+      const nisnInput = document.getElementById('nisn').value.trim();
+
+      try {
+        const response = await fetch('data-siswa.json');
+        const data = await response.json();
+
+        const siswa = data.find(s => 
+          s.nama.toLowerCase() === namaInput && s.nisn === nisnInput
+        );
+
+        if (siswa) {
+          localStorage.setItem('nama', siswa.nama);
+          localStorage.setItem('lulus', siswa.lulus);
+          window.location.href = 'pesan-akhir.html';
+        } else {
+          errorMsg.textContent = "Nama atau NISN tidak cocok. Periksa kembali.";
+        }
+
+      } catch (err) {
+        errorMsg.textContent = "Gagal memuat data siswa.";
       }
     });
   </script>

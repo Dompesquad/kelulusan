@@ -45,8 +45,11 @@
       z-index: 1;
     }
     #kutipanText {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      line-height: 1.5;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     #namaGuru {
       font-size: 1.2rem;

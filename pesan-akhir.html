@@ -35,15 +35,12 @@
       background: rgba(0, 0, 0, 0.65);
       padding: 30px 40px;
       border-radius: 15px;
-      max-width: 600px;
+      max-width: 700px;
       font-size: 1.4rem;
       font-weight: bold;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
-    }
-
-    .nama {
-      font-weight: bold;
-      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.6;
     }
 
     .lulus {
@@ -51,7 +48,22 @@
     }
 
     .tidak-lulus {
-      color: #ff4444;
+      color: #ff4d4d;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0047ab;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003580;
     }
   </style>
 </head>
@@ -59,25 +71,35 @@
 
   <div id="pesanAkhir">
     <p id="isiPesan">Memuat...</p>
+    <button onclick="mulaiUlang()">Kembali ke Halaman Awal</button>
   </div>
 
   <script>
     const nama = localStorage.getItem('nama');
-    const lulus = localStorage.getItem('lulus') === 'true';
+    const lulus = localStorage.getItem('lulus');
+
+    if (!nama || lulus === null) {
+      window.location.href = 'index.html';
+    }
+
     const isiPesan = document.getElementById('isiPesan');
 
-    if (nama) {
-      if (lulus) {
-        isiPesan.innerHTML = `
-          Selamat <span class="nama">${nama}</span>, kamu <span class="lulus">lulus</span>! Selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!
-        `;
-      } else {
-        isiPesan.innerHTML = `
-          Maaf <span class="nama">${nama}</span>, kamu <span class="tidak-lulus">belum lulus</span>. Silakan tuntaskan nilaimu atau kamu akan mengulang 1 tahun lagi.
-        `;
-      }
+    if (lulus === 'true') {
+      isiPesan.innerHTML = `
+        <span class="lulus">SELAMAT ANDA DINYATAKAN LULUS</span><br />
+        SELAMAT MELANJUTKAN PENDIDIKAN DI JENJANG SELANJUTNYA
+      `;
     } else {
-      isiPesan.textContent = "Data tidak ditemukan. Silakan kembali ke halaman awal.";
+      isiPesan.innerHTML = `
+        <span class="tidak-lulus">MOHON MAAF ANDA LULUS BERSYARAT</span><br />
+        SILAHKAN MENYELESAIKAN PENUNTASAN NILAI TERLEBIH DAHULU<br />
+        SEBELUM DINYATAKAN LULUS
+      `;
+    }
+
+    function mulaiUlang() {
+      localStorage.clear();
+      window.location.href = 'index.html';
     }
   </script>
 

@@ -263,5 +263,15 @@
     "nama": "Yatmi",
     "nisn": "0096939865",
     "lulus": true
+  },
+  {
+    "nama": "Nurhaeda",
+    "nisn": "27",
+    "lulus": true
+  },
+  {
+    "nama": "Zulfikar Fajar Bahari",
+    "nisn": "04",
+    "lulus": false
   }
 ]

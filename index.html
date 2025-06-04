@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cek Kelulusan</title>
+  <title>Ucapan Kelulusan Akhir</title>
   <style>
     body {
       margin: 0; padding: 0;
       height: 100vh;
-      background-image: url('images/foto_sekolah.webp');
+      background-image: url('images/background-sekolah1.webp');
       background-size: cover;
       background-position: center;
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      padding: 20px;
       position: relative;
     }
 
@@ -26,98 +29,56 @@
       z-index: 0;
     }
 
-    form {
+    #pesanAkhir {
       position: relative;
       z-index: 1;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.65);
       padding: 30px 40px;
       border-radius: 15px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      text-align: center;
-      width: 320px;
-      color: white;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 10px;
-      margin: 12px 0;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.6);
-      background-color: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      font-size: 1.1rem;
-      background-color: #0047ab;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      max-width: 600px;
+      font-size: 1.4rem;
       font-weight: bold;
-      margin-top: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
 
-    button:hover {
-      background-color: #003580;
+    .nama {
+      font-weight: bold;
+      color: #fff;
     }
 
-    .error {
-      color: red;
-      font-size: 0.9rem;
-      margin-top: 10px;
+    .lulus {
+      color: #00ff88;
+    }
+
+    .tidak-lulus {
+      color: #ff4444;
     }
   </style>
 </head>
 <body>
 
-  <form id="formInput">
-    <h2>Cek Kelulusan</h2>
-    <input type="text" id="nama" placeholder="Nama lengkap" required />
-    <input type="text" id="nisn" placeholder="NISN" required />
-    <button type="submit">Lihat Hasil</button>
-    <div class="error" id="errorMsg"></div>
-  </form>
+  <div id="pesanAkhir">
+    <p id="isiPesan">Memuat...</p>
+  </div>
 
   <script>
-    const form = document.getElementById('formInput');
-    const errorMsg = document.getElementById('errorMsg');
+    const nama = localStorage.getItem('nama');
+    const lulus = localStorage.getItem('lulus') === 'true';
+    const isiPesan = document.getElementById('isiPesan');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const namaInput = document.getElementById('nama').value.trim().toLowerCase();
-      const nisnInput = document.getElementById('nisn').value.trim();
-
-      try {
-        const response = await fetch('data-siswa.json');
-        const data = await response.json();
-
-        const siswa = data.find(s => 
-          s.nama.toLowerCase() === namaInput && s.nisn === nisnInput
-        );
-
-        if (siswa) {
-          localStorage.setItem('nama', siswa.nama);
-          localStorage.setItem('lulus', siswa.lulus);
-          window.location.href = 'kutipan.html'; // ⬅️ arahkan ke kutipan dulu
-        } else {
-          errorMsg.textContent = "Nama atau NISN tidak cocok. Periksa kembali.";
-        }
-
-      } catch (err) {
-        errorMsg.textContent = "Gagal memuat data siswa.";
+    if (nama) {
+      if (lulus) {
+        isiPesan.innerHTML = `
+          Selamat <span class="nama">${nama}</span>, kamu <span class="lulus">lulus</span>! Selamat melanjutkan ke tingkat berikutnya. Jangan lupakan guru-gurumu yang ada di MTs Muhammadiyah Malino ya. Sampai ketemu lagi!
+        `;
+      } else {
+        isiPesan.innerHTML = `
+          Maaf <span class="nama">${nama}</span>, kamu <span class="tidak-lulus">belum lulus</span>. Silakan tuntaskan nilaimu atau kamu akan mengulang 1 tahun lagi.
+        `;
       }
-    });
+    } else {
+      isiPesan.textContent = "Data tidak ditemukan. Silakan kembali ke halaman awal.";
+    }
   </script>
 
 </body>

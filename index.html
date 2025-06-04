@@ -109,7 +109,7 @@
         if (siswa) {
           localStorage.setItem('nama', siswa.nama);
           localStorage.setItem('lulus', siswa.lulus);
-          window.location.href = 'pesan-akhir.html';
+          window.location.href = 'kutipan.html'; // ⬅️ arahkan ke kutipan dulu
         } else {
           errorMsg.textContent = "Nama atau NISN tidak cocok. Periksa kembali.";
         }
